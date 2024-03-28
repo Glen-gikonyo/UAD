@@ -141,7 +141,7 @@
                   <a class="nav-link" href="contact.html">Contact</a>
                 </li>
                 <li class="nav-item highlighted-menu">
-                  <a class="nav-link" href="contact.html">Book Now</a>
+                  <a class="nav-link" href="contact.html">Get Quote</a>
                 </li>
               </ul>
             </div>
@@ -209,7 +209,6 @@
           <!-- Accent dropdown -->
           <select class="form-select custom-select" id="accentSelect">
             <option value="" selected disabled>Select Accent</option>
-            <!-- Accent options will be dynamically populated based on the selected language -->
             <option value="african_english">African English</option>
             <option value="african_french">African French</option>
             <option value="african_portuguese">African Portuguese</option>
@@ -225,7 +224,7 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-12">
           <!-- Search button -->
-          <button class="btn btn-success w-100" id="searchButton">
+          <button class="btn btn-success w-100" id="searchButton" >
             Search <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -240,7 +239,7 @@
           class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4"
           style="padding-top: 50px"
         >
-          <div class="card card-custom bg-white border-white">
+          <div class="card card-custom bg-white border-white" data-language="african_english" data-voice-type="female" data-accent="african_english">
             <div
               class="card-custom-img"
               style="background-image: url(./images/kenyan.jpg)"
@@ -293,7 +292,7 @@
                 class="btn-default"
                 style="font-size: 14px; padding: 6px 10px"
                 onclick="addToCart('Alikiba feat Sabah Salum Yalaiti'); event.preventDefault()"
-                >Select <i class="fa-solid fa-plus"></i
+                >Get Quote <i class="fa-solid fa-plus"></i
               ></a>
             </div>
           </div>
@@ -344,7 +343,7 @@
                 class="btn-default"
                 style="font-size: 14px; padding: 6px 10px"
                 onclick="addToCart('ARIA MEHOKETE NGAI'); event.preventDefault()"
-                >Select <i class="fa-solid fa-plus"></i
+                >Get Quote <i class="fa-solid fa-plus"></i
               ></a>
               </div>
             </div>
@@ -396,7 +395,7 @@
                 class="btn-default"
                 style="font-size: 14px; padding: 6px 10px"
                 onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')"
-                >Select <i class="fa-solid fa-plus"></i
+                >Get Quote <i class="fa-solid fa-plus"></i
               ></a>
               </div>
             </div>
@@ -448,7 +447,7 @@
                class="btn-default"
                style="font-size: 14px; padding: 6px 10px"
                onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')"
-               >Select <i class="fa-solid fa-plus"></i
+               >Get Quote <i class="fa-solid fa-plus"></i
              ></a>
               </div>
             </div>
@@ -519,7 +518,7 @@
                class="btn-default"
                style="font-size: 14px; padding: 6px 10px"
                onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')"
-               >Select <i class="fa-solid fa-plus"></i
+               >Get Quote <i class="fa-solid fa-plus"></i
              ></a>
             </div>
           </div>
@@ -570,7 +569,7 @@
                  class="btn-default"
                  style="font-size: 14px; padding: 6px 10px"
                  onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')"
-                 >Select <i class="fa-solid fa-plus"></i
+                 >Get Quote <i class="fa-solid fa-plus"></i
                ></a>
               </div>
             </div>
@@ -622,7 +621,7 @@
                 class="btn-default"
                 style="font-size: 14px; padding: 6px 10px"
                 onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')"
-                >Select <i class="fa-solid fa-plus"></i
+                >Get Quote <i class="fa-solid fa-plus"></i
               ></a>
               </div>
             </div>
@@ -674,28 +673,13 @@
               class="btn-default"
               style="font-size: 14px; padding: 6px 10px"
               onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')"
-              >Select <i class="fa-solid fa-plus"></i
+              >Get Quote <i class="fa-solid fa-plus"></i
             ></a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div id="sidebar">
-      <h2>
-        <i
-          id="closeSidebarButton"
-          class="fa-solid fa-x fa-lg"
-          style="color: #08c48c"
-        ></i>
-        Selected Voice Samples
-      </h2>
-      <div id="selectedAudiosList"></div>
-      <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px; width: 100%; text-align: center; margin-top: 1rem;"
-        >Get Quote</i
-      ></a>
     </div>
 
     <!-- Our Projects Page End -->
@@ -924,86 +908,37 @@
     <!-- Main Custom js file -->
     <script src="js/function.js"></script>
     <!-- Select Audio -->
-    <script>
-      // Array to store selected audio files
-      let selectedAudios = [];
-    
-      // Function to add audio to cart
-      function addToCart(audioSrc) {
-        // Remove the audio if it's already selected
-        selectedAudios = selectedAudios.filter((audio) => audio !== audioSrc);
-    
-        // Add the new audio source
-        selectedAudios.push(audioSrc);
-        updateSidebar();
-        document.getElementById("sidebar").classList.add("open"); // Slide in the sidebar
-      }
-    
-      function updateSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        const selectedAudiosList = document.getElementById("selectedAudiosList");
-        selectedAudiosList.innerHTML = "";
-    
-        // Loop through selectedAudios array and create a list item for each item
-        selectedAudios.forEach((audioSrc) => {
-          const listItem = document.createElement("div");
-          listItem.style.position = "relative"; // Set position to relative
-          listItem.classList.add(
-            "border",
-            "border-gray-200",
-            "rounded-sm",
-            "break-inside-avoid",
-            "hover:shadow-md",
-            "group",
-            "overflow-hidden",
-            "truncate",
-            "text-sm",
-            "p-2",
-            "space-y-1",
-            "bg-white",
-            "mb-3"
-          );
-    
-          // Add Font Awesome icon
-          const icon = document.createElement("i");
-          icon.classList.add(
-            "fas",
-            "fa-times",
-            "text-red-500",
-            "absolute",
-            "top-0",
-            "right-0",
-            "mr-1",
-            "cursor-pointer"
-          ); // Adjust classes as needed
-          icon.addEventListener("click", () => {
-            // Handle click event to remove item from list
-            listItem.remove();
-            // Remove the audio source from the selectedAudios array
-            selectedAudios = selectedAudios.filter((audio) => audio !== audioSrc);
-            updateSidebar();
-          });
-    
-          // Add audio name
-          const audioName = document.createElement("div");
-          audioName.textContent = audioSrc;
-    
-          listItem.appendChild(icon);
-          listItem.appendChild(audioName);
-          selectedAudiosList.appendChild(listItem);
-        });
-        sidebar.style.display = "block";
-        sidebar.classList.add("open");
-        selectedAudiosList.style.listStyleType = "none"; // Remove bullet points
-      }
-    
-      document
-        .getElementById("closeSidebarButton")
-        .addEventListener("click", function () {
-          document.getElementById("sidebar").style.display = "none";
-        });
+<!-- Add these lines to the head section of your HTML file -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Function to filter cards based on selected options
+    function filterCards() {
+      var language = $('#languageSelect').val();
+      var voiceType = $('#voiceTypeSelect').val();
+      var accent = $('#accentSelect').val();
 
-   
-    </script>
+      $('.card-custom').hide(); // Hide all cards initially
+
+      // Show cards that match the selected options
+      $('.card-custom').filter(function () {
+        var $card = $(this);
+        var cardLanguage = $card.data('language');
+        var cardVoiceType = $card.data('voice-type');
+        var cardAccent = $card.data('accent');
+
+        return (
+          (!language || cardLanguage === language) &&
+          (!voiceType || cardVoiceType === voiceType) &&
+          (!accent || cardAccent === accent)
+        );
+      }).show();
+    }
+
+    // Attach event listeners to dropdowns and search button
+    $('#languageSelect, #voiceTypeSelect, #accentSelect').on('change', filterCards);
+    $('#searchButton').on('click', filterCards);
+  });
+</script>
   </body>
 </html>
