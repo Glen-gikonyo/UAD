@@ -15,6 +15,25 @@
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
   <!-- Plyr Audio -->
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  <style>
+    .audio-container {
+      margin-bottom: 15px;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .plyr__controls__item.plyr__volume {
+      display: none;
+    }
+
+    .plyr__progress input {
+      color: #89ea5f !important;
+    }
+
+    .plyr__controls__item.plyr__control {
+      background: #89ea5f !important;
+    }
+  </style>
   <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
 
   <!-- Google Fonts css-->
@@ -50,7 +69,9 @@
   <div class="preloader">
     <div class="loading-container">
       <div class="loading"></div>
-      <div id="loading-icon"><img src="images/logo-png-2-removebg-preview.png" alt="" /></div>
+      <div id="loading-icon">
+        <img src="images/logo-png-2-removebg-preview.png" alt="" />
+      </div>
     </div>
   </div>
   <!-- Preloader End -->
@@ -208,12 +229,16 @@
           <option value="kenyan_english">East African English</option>
           <option value="nigerian_english">West African English</option>
           <option value="ghanaian_english">West African English</option>
-          <option value="south_african_english">Southern African English</option>
+          <option value="south_african_english">
+            Southern African English
+          </option>
           <option value="zimbabwean_english">Southern African English</option>
           <option value="west_african_french">West African French</option>
           <option value="senegalese_french">West African French</option>
           <option value="ivorian_french">West African French</option>
-          <option value="central_african_french">Central African French</option>
+          <option value="central_african_french">
+            Central African French
+          </option>
           <option value="cameroonian_french">Central African French</option>
           <option value="congolese_french">Central African French</option>
           <option value="north_african_french">North African French</option>
@@ -232,7 +257,9 @@
           <option value="western_oromo">Western Oromo</option>
           <option value="northern_somali">Northern Somali</option>
           <option value="coastal_somali">Coastal Somali</option>
-          <option value="bantu_influenced_somali">Bantu-influenced Somali</option>
+          <option value="bantu_influenced_somali">
+            Bantu-influenced Somali
+          </option>
           <option value="kenyan_swahili">Kenyan Swahili</option>
           <option value="tanzanian_swahili">Tanzanian Swahili</option>
           <option value="congolese_swahili">Congolese Swahili</option>
@@ -242,7 +269,8 @@
       <div class="col-lg-3 col-md-3 col-sm-6 col-12">
         <!-- Search button -->
         <button class="btn btn-success w-100" id="searchButton">
-          <i class="fa-solid fa-arrows-rotate" style="color: #ffffff;"></i>  Reset Filters   
+          <i class="fa-solid fa-arrows-rotate" style="color: #ffffff"></i>
+          Reset Filters
         </button>
       </div>
     </div>
@@ -250,166 +278,19 @@
 
   <!-- End of Search Functionality -->
 
-<div class="container">
-    <div class="row" id="voiceContainer">
-        <!-- Cards will be dynamically added here -->
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <p id="voiceCount"></p>
-            <button id="loadMoreButton" class="btn btn-primary">Load More</button>
-        </div>
-    </div>
-</div>
-
   <div class="container">
+    <div class="row" id="voiceContainer">
+      <!-- Cards will be dynamically added here -->
+    </div>
     <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4" style="padding-top: 50px">
-        <div class="card card-custom bg-white border-white">
-          <div class="card-custom-img" style="background-image: url(./images/kenyan.jpg)"></div>
-          <div class="card-custom-avatar">
-            <img class="img-fluid" src="./images/kenyan.jpg" alt="Avatar" />
-          </div>
-          <div class="card-body" style="overflow-y: auto">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">
-              Cards have minimum height set. You can use Bootstrap
-              <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks">card-decks</a>
-              to align them nicely in a row.
-            </p>
-          </div>
-          <div class="card-footer" style="background: inherit; border-color: inherit">
-            <div class="audio-container">
-              <audio id="player5" crossorigin playsinline>
-                <source src="images/y2mate.com - Alikiba feat Sabah Salum  Yalaiti Visualiser.mp3" type="audio/mp3" />
-              </audio>
-            </div>
-            <script>
-              const player5 = new Plyr("#player5", {});
-              window.player5 = player5;
-            </script>
-            <style>
-              .audio-container {
-                margin-bottom: 15px;
-                max-width: 500px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-              }
-
-              .plyr__controls__item.plyr__volume {
-                display: none;
-              }
-
-              .plyr__progress input {
-                color: #89ea5f !important;
-              }
-
-              .plyr__controls__item.plyr__control {
-                background: #89ea5f !important;
-              }
-            </style>
-            <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px"
-              onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')">Get Quote <i class="fa-solid fa-plus"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4" style="padding-top: 50px">
-        <div class="card card-custom bg-white border-white">
-          <!-- Card content here -->
-          <div class="card card-custom bg-white border-white">
-            <div class="card-custom-img" style="background-image: url(./images/kenyan.jpg)"></div>
-            <div class="card-custom-avatar">
-              <img class="img-fluid" src="./images/kenyan.jpg" alt="Avatar" />
-            </div>
-            <div class="card-body" style="overflow-y: auto">
-              <h4 class="card-title">Card title</h4>
-              <p class="card-text">
-                Cards have minimum height set. You can use Bootstrap
-                <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks">card-decks</a>
-                to align them nicely in a row.
-              </p>
-            </div>
-            <div class="card-footer" style="background: inherit; border-color: inherit">
-              <div class="audio-container">
-                <audio id="player6" crossorigin playsinline>
-                  <source src="images/y2mate.com - Alikiba feat Sabah Salum  Yalaiti Visualiser.mp3" type="audio/mp3" />
-                </audio>
-              </div>
-              <script>
-                const player6 = new Plyr("#player6", {});
-                window.player6 = player6;
-              </script>
-              <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px"
-                onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')">Get Quote <i class="fa-solid fa-plus"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4" style="padding-top: 50px">
-        <div class="card card-custom bg-white border-white">
-          <!-- Card content here -->
-          <div class="card card-custom bg-white border-white">
-            <div class="card-custom-img" style="background-image: url(./images/kenyan.jpg)"></div>
-            <div class="card-custom-avatar">
-              <img class="img-fluid" src="./images/kenyan.jpg" alt="Avatar" />
-            </div>
-            <div class="card-body" style="overflow-y: auto">
-              <h4 class="card-title">Card title</h4>
-              <p class="card-text">
-                Cards have minimum height set. You can use Bootstrap
-                <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks">card-decks</a>
-                to align them nicely in a row.
-              </p>
-            </div>
-            <div class="card-footer" style="background: inherit; border-color: inherit">
-              <div class="audio-container">
-                <audio id="player7" crossorigin playsinline>
-                  <source src="images/y2mate.com - Alikiba feat Sabah Salum  Yalaiti Visualiser.mp3" type="audio/mp3" />
-                </audio>
-              </div>
-              <script>
-                const player7 = new Plyr("#player7", {});
-                window.player7 = player7;
-              </script>
-              <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px"
-                onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')">Get Quote <i class="fa-solid fa-plus"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4" style="padding-top: 50px">
-        <div class="card card-custom bg-white border-white">
-          <!-- Card content here -->
-          <div class="card card-custom bg-white border-white">
-            <div class="card-custom-img" style="background-image: url(./images/kenyan.jpg)"></div>
-            <div class="card-custom-avatar">
-              <img class="img-fluid" src="./images/kenyan.jpg" alt="Avatar" />
-            </div>
-            <div class="card-body" style="overflow-y: auto">
-              <h4 class="card-title">Card title</h4>
-              <p class="card-text">
-                Cards have minimum height set. You can use Bootstrap
-                <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks">card-decks</a>
-                to align them nicely in a row.
-              </p>
-            </div>
-            <div class="card-footer" style="background: inherit; border-color: inherit">
-              <div class="audio-container">
-                <audio id="player8" crossorigin playsinline>
-                  <source src="images/y2mate.com - Alikiba feat Sabah Salum  Yalaiti Visualiser.mp3" type="audio/mp3" />
-                </audio>
-              </div>
-              <script>
-                const player8 = new Plyr("#player8", {});
-                window.player8 = player8;
-              </script>
-              <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px"
-                onclick="addToCart('Alikiba feat Sabah Salum Yalaiti')">Get Quote <i class="fa-solid fa-plus"></i></a>
-            </div>
-          </div>
-        </div>
+      <div class="col-12">
+        <p id="voiceCount"></p>
+        <button id="loadMoreButton" class="btn btn-primary">Load More</button>
       </div>
     </div>
   </div>
+
+
 
   <!-- Our Projects Page End -->
 
@@ -629,26 +510,187 @@
   <script src="js/function.js"></script>
   <!-- Select Audio -->
   <!-- Add these lines to the head section of your HTML file -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  // Simulated data for voice samples
-  var voiceSamples = [
-    { title: 'Card title 1', audioSrc: 'path/to/audio1.mp3' },
-    { title: 'Card title 2', audioSrc: 'path/to/audio2.mp3' },
-    { title: 'Card title 3', audioSrc: 'path/to/audio3.mp3' },
-    { title: 'Card title 3', audioSrc: 'path/to/audio3.mp3' },
-    // Add more sample data here
-  ];
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // Simulated data for voice samples
+    var voiceSamples = [
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 1",
+        audioSrc: "path/to/audio1.mp3",
+        language: "african_english",
+        voiceType: "female",
+        accent: "kenyan_english",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+            {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 1",
+        audioSrc: "path/to/audio1.mp3",
+        language: "african_english",
+        voiceType: "female",
+        accent: "kenyan_english",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 2",
+        audioSrc: "path/to/audio2.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      {
+        image: "./images/kenyan.jpg",
+        imageAvatar: "./images/kenyan.jpg",
+        title: "Card title 3",
+        audioSrc: "path/to/audio3.mp3",
+      },
+      // Add more sample data here
+    ];
 
-  $(document).ready(function () {
-    // Function to create a card element
-    function createCard(sample, id) {
-      return `
+    $(document).ready(function () {
+      // Function to create a card element
+      function createCard(sample, id) {
+        return `
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4" style="padding-top: 50px">
-                        <div class="card card-custom bg-white border-white">
-                            <div class="card-custom-img" style="background-image: url(./images/kenyan.jpg)"></div>
+                        <div class="card card-custom bg-white border-white"
+                        data-language="${sample.language}" 
+                data-voice-type="${sample.voiceType}" 
+                data-accent="${sample.accent}">
+                            <div class="card-custom-img" style="background-image: url(${sample.image})"></div>
                             <div class="card-custom-avatar">
-                                <img class="img-fluid" src="./images/kenyan.jpg" alt="Avatar" />
+                                <img class="img-fluid" src="${sample.imageAvatar}" alt="Avatar" />
                             </div>
                             <div class="card-body" style="overflow-y: auto">
                                 <h4 class="card-title">${sample.title}</h4>
@@ -665,72 +707,98 @@
                                     </audio>
                                 </div>
                                 <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px"
-                                    onclick="addToCart('${sample.title}')">Get Quote <i class="fa-solid fa-plus"></i></a>
+                                    ">Get Quote <i class="fa-solid fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
                 `;
-    }
+      }
 
-    // Function to add cards to the container
-    function addCards() {
-      var container = $('#voiceContainer');
+      const itemsPerPage = 11; // Number of items per page
+      let currentPage = 1; // Current page
 
-      voiceSamples.forEach((sample, index) => {
-        container.append(createCard(sample, index + 1));
+      function addCards() {
+        var container = $("#voiceContainer");
+        var startIndex = (currentPage - 1) * itemsPerPage;
+        var endIndex = startIndex + itemsPerPage;
+
+        // Loop through the voice samples for the current page
+        for (var i = startIndex; i < endIndex && i < voiceSamples.length; i++) {
+          container.append(createCard(voiceSamples[i], i + 1));
+        }
+
+        // Initialize Plyr for each audio player in the current page
+        container.find("audio").each(function () {
+          const player = new Plyr(this);
+          player.volume = 0.5; // Set default volume
+        });
+
+        updateVoiceCount(); // Update the voice count display
+      }
+
+      function updateVoiceCount() {
+        var totalSamples = voiceSamples.length;
+        var displayedSamples = Math.min(currentPage * itemsPerPage, totalSamples);
+
+        $("#voiceCount").text(`Displaying ${displayedSamples} voices out of ${totalSamples} voices.`);
+      }
+
+      // Load more samples when the "Load More" button is clicked
+      $("#loadMoreButton").click(function () {
+        currentPage++; // Increment the current page
+        addCards(); // Add the next page of samples
       });
 
-      // Initialize Plyr for each audio player
-      container.find('audio').each(function () {
-        const player = new Plyr(this);
-        player.volume = 0.5; // Set default volume
-      });
-    }
+      // Initially load the first page of cards
+      addCards();
 
-    // Initially load the cards
-    addCards();
-  });
+      $(document).ready(function () {
+        // Function to filter cards based on selected options
+        function filterCards() {
+          var language = $("#languageSelect").val();
+          var voiceType = $("#voiceTypeSelect").val();
+          var accent = $("#accentSelect").val();
 
-  $(document).ready(function () {
-    // Function to filter cards based on selected options
-    function filterCards() {
-      var language = $('#languageSelect').val();
-      var voiceType = $('#voiceTypeSelect').val();
-      var accent = $('#accentSelect').val();
+          $(".card-custom").hide(); // Hide all cards initially
 
-      $('.card-custom').hide(); // Hide all cards initially
+          // Show cards that match the selected options
+          $(".card-custom")
+            .filter(function () {
+              var $card = $(this);
+              var cardLanguage = $card.data("language");
+              var cardVoiceType = $card.data("voice-type");
+              var cardAccent = $card.data("accent");
 
-      // Show cards that match the selected options
-      $('.card-custom').filter(function () {
-        var $card = $(this);
-        var cardLanguage = $card.data('language');
-        var cardVoiceType = $card.data('voice-type');
-        var cardAccent = $card.data('accent');
+              return (
+                (!language || cardLanguage === language) &&
+                (!voiceType || cardVoiceType === voiceType) &&
+                (!accent || cardAccent === accent)
+              );
+            })
+            .show();
+        }
 
-        return (
-          (!language || cardLanguage === language) &&
-          (!voiceType || cardVoiceType === voiceType) &&
-          (!accent || cardAccent === accent)
+        // Attach event listeners to dropdowns and search button
+        $("#languageSelect, #voiceTypeSelect, #accentSelect").on(
+          "change",
+          filterCards
         );
-      }).show();
-    }
+        $("#searchButton").on("click", filterCards);
 
-    // Attach event listeners to dropdowns and search button
-    $('#languageSelect, #voiceTypeSelect, #accentSelect').on('change', filterCards);
-    $('#searchButton').on('click', filterCards);
+        // Reset filters function
+        function resetFilters() {
+          $("#languageSelect").val(""); // Reset language dropdown
+          $("#voiceTypeSelect").val(""); // Reset voice type dropdown
+          $("#accentSelect").val(""); // Reset accent dropdown
+          filterCards(); // Filter cards after resetting
+        }
 
-    // Reset filters function
-    function resetFilters() {
-      $('#languageSelect').val(''); // Reset language dropdown
-      $('#voiceTypeSelect').val(''); // Reset voice type dropdown
-      $('#accentSelect').val(''); // Reset accent dropdown
-      filterCards(); // Filter cards after resetting
-    }
+        // Attach event listener to "Reset Filters" button
+        $("#searchButton").on("click", resetFilters);
+      });
+    });
+  </script>
 
-    // Attach event listener to "Reset Filters" button
-    $('#searchButton').on('click', resetFilters);
-  });
-</script>
 </body>
 
 </html>
