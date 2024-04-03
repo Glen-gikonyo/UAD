@@ -268,7 +268,7 @@
       </div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-12">
         <!-- Search button -->
-        <button class="btn btn-success w-100" id="searchButton">
+        <button class="btn-default h-75 w-100 d-flex align-items-center justify-content-center" id="searchButton">
           <i class="fa-solid fa-arrows-rotate" style="color: #ffffff"></i>
           Reset Filters
         </button>
@@ -279,18 +279,24 @@
   <!-- End of Search Functionality -->
 
   <div class="container">
+    <p id="voiceCount"></p>
     <div class="row" id="voiceContainer">
       <!-- Cards will be dynamically added here -->
     </div>
     <div class="row">
       <div class="col-12">
-        <p id="voiceCount"></p>
-        <button id="loadMoreButton" class="btn btn-primary">Load More</button>
+        <button id="loadMoreButton" class="btn-default w-100">Load More</button>
+        <div class="preloader">
+          <div class="loading-container">
+            <div class="loading"></div>
+            <div id="loading-icon">
+              <img src="images/logo-png-2-removebg-preview.png" alt="" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-
 
   <!-- Our Projects Page End -->
 
@@ -595,7 +601,7 @@
         title: "Card title 3",
         audioSrc: "path/to/audio3.mp3",
       },
-            {
+      {
         image: "./images/kenyan.jpg",
         imageAvatar: "./images/kenyan.jpg",
         title: "Card title 1",
@@ -683,7 +689,7 @@
       // Function to create a card element
       function createCard(sample, id) {
         return `
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4" style="padding-top: 50px">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
                         <div class="card card-custom bg-white border-white"
                         data-language="${sample.language}" 
                 data-voice-type="${sample.voiceType}" 
@@ -720,10 +726,13 @@
       function addCards() {
         var container = $("#voiceContainer");
         var startIndex = (currentPage - 1) * itemsPerPage;
-        var endIndex = startIndex + itemsPerPage;
+        var endIndex = Math.min(startIndex + itemsPerPage, voiceSamples.length); // Ensure endIndex doesn't exceed the array length
+
+        // Clear the container before adding new cards
+        container.empty();
 
         // Loop through the voice samples for the current page
-        for (var i = startIndex; i < endIndex && i < voiceSamples.length; i++) {
+        for (var i = startIndex; i < endIndex; i++) {
           container.append(createCard(voiceSamples[i], i + 1));
         }
 
@@ -743,11 +752,33 @@
         $("#voiceCount").text(`Displaying ${displayedSamples} voices out of ${totalSamples} voices.`);
       }
 
-      // Load more samples when the "Load More" button is clicked
       $("#loadMoreButton").click(function () {
-        currentPage++; // Increment the current page
-        addCards(); // Add the next page of samples
+        // Disable the button to prevent double-click
+        $(this).prop("disabled", true);
+
+        // Show the loading animation
+        $(".preloader").show();
+
+        // Calculate the scroll position
+        var scrollPosition = $(".navbar").height() || 0; // Use the height of your navbar, or set an offset
+
+        // Add a small delay to simulate loading
+        setTimeout(function () {
+          currentPage++; // Increment the current page
+          addCards(); // Add the next page of samples
+
+          // Hide the loading animation
+          $(".preloader").hide();
+
+          // Enable the button after loading
+          $("#loadMoreButton").prop("disabled", false);
+
+          // Scroll to the calculated position
+          window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+        }, 1000); // Change the delay as needed
       });
+
+
 
       // Initially load the first page of cards
       addCards();
