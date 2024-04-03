@@ -522,9 +522,11 @@
     var voiceSamples = [
       {
         image: "./images/kenyan.jpg",
-        imageAvatar: "./images/kenyan.jpg",
-        title: "Card title 1",
-        audioSrc: "path/to/audio1.mp3",
+        imageAvatar: "./images/woman.png",
+        title: "African English",
+        sub_title1: "Gender: Female",
+        sub_title2: "Accent: East African English",
+        audioSrc: "./voice-samples/ENG2FVO_ZILPAH.mp3",
         language: "african_english",
         voiceType: "female",
         accent: "kenyan_english",
@@ -699,12 +701,13 @@
                                 <img class="img-fluid" src="${sample.imageAvatar}" alt="Avatar" />
                             </div>
                             <div class="card-body" style="overflow-y: auto">
-                                <h4 class="card-title">${sample.title}</h4>
-                                <p class="card-text">
-                                    Cards have minimum height set. You can use Bootstrap
-                                    <a href="https://getbootstrap.com/docs/4.0/components/card/#card-decks">card-decks</a>
-                                    to align them nicely in a row.
-                                </p>
+                                <h3 class="card-title">${sample.title}</h3>
+                                <h6 class="card-text">
+                                  ${sample.sub_title1}
+                                </h6>
+                                  <h6 class="card-text">
+                                  ${sample.sub_title2}
+                                </h6>
                             </div>
                             <div class="card-footer" style="background: inherit; border-color: inherit">
                                 <div class="audio-container">
