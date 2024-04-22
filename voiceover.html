@@ -539,7 +539,7 @@
         sub_title1: "Gender: Female",
         sub_title2: "Accent: West African French",
         audioSrc: "./voice-samples/FRA6MVO_FRANK.wav",
-        language: "west_african_french",
+        language: "african_french",
         voiceType: "female",
         accent: "west_african_french",
       },
@@ -561,9 +561,9 @@
         sub_title1: "Gender: Male",
         sub_title2: "Accent: Central Amharic",
         audioSrc: "./voice-samples/AM3MVO_MOHAMED.mp3",
-        language: "central_amharic",
+        language: "amharic",
         voiceType: "male",
-        accent: "angolan_portuguese",
+        accent: "central_amharic",
       },
       {
         image: "./images/rwandan_flag.jpg",
@@ -637,7 +637,7 @@
         title: "African English",
         sub_title1: "Gender: Female",
         sub_title2: "Accent: East African English",
-        audioSrc: "./voice-samples/ENG2FVO_WAKIO.mp3",
+        audioSrc: "./voice-samples/ENG2FVO_WAKIO.wav",
         language: "african_english",
         voiceType: "female",
         accent: "kenyan_english",
@@ -653,15 +653,6 @@
         imageAvatar: "./images/kenyan.jpg",
         title: "Card title 3",
         audioSrc: "path/to/audio3.mp3",
-      },
-      {
-        image: "./images/kenyan.jpg",
-        imageAvatar: "./images/kenyan.jpg",
-        title: "Card title 1",
-        audioSrc: "path/to/audio1.mp3",
-        language: "african_english",
-        voiceType: "female",
-        accent: "kenyan_english",
       },
       {
         image: "./images/kenyan.jpg",
@@ -739,55 +730,55 @@
     ];
 
     $(document).ready(function () {
+      const itemsPerPage = 11; // Number of items per page
+      let currentPage = 1; // Current page
+
+      // Store the initial set of cards
+      var initialCards = voiceSamples.map(function (sample, index) {
+        return createCard(sample, index + 1);
+      });
+
       // Function to create a card element
       function createCard(sample, id) {
         return `
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                        <div class="card card-custom bg-white border-white"
-                        data-language="${sample.language}" 
-                data-voice-type="${sample.voiceType}" 
-                data-accent="${sample.accent}">
-                            <div class="card-custom-img" style="background-image: url(${sample.image})"></div>
-                            <div class="card-custom-avatar">
-                                <img class="img-fluid" src="${sample.imageAvatar}" alt="Avatar" />
-                            </div>
-                            <div class="card-body" style="overflow-y: auto">
-                                <h3 class="card-title">${sample.title}</h3>
-                                <h6 class="card-text">
-                                  ${sample.sub_title1}
-                                </h6>
-                                  <h6 class="card-text">
-                                  ${sample.sub_title2}
-                                </h6>
-                            </div>
-                            <div class="card-footer" style="background: inherit; border-color: inherit">
-                                <div class="audio-container">
-                                    <audio id="player${id}" crossorigin playsinline>
-                                        <source src="${sample.audioSrc}" type="audio/mp3" />
-                                    </audio>
-                                </div>
-                                <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px"
-                                    ">Get Quote <i class="fa-solid fa-plus"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                `;
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+        <div class="card card-custom bg-white border-white"
+          data-language="${sample.language}"
+          data-voice-type="${sample.voiceType}"
+          data-accent="${sample.accent}">
+          <div class="card-custom-img" style="background-image: url(${sample.image})"></div>
+          <div class="card-custom-avatar">
+            <img class="img-fluid" src="${sample.imageAvatar}" alt="Avatar" />
+          </div>
+          <div class="card-body" style="overflow-y: auto">
+            <h3 class="card-title">${sample.title}</h3>
+            <h6 class="card-text">${sample.sub_title1}</h6>
+            <h6 class="card-text">${sample.sub_title2}</h6>
+          </div>
+          <div class="card-footer" style="background: inherit; border-color: inherit">
+            <div class="audio-container">
+              <audio id="player${id}" crossorigin playsinline>
+                <source src="${sample.audioSrc}" type="audio/mp3" />
+              </audio>
+            </div>
+            <a href="#" class="btn-default" style="font-size: 14px; padding: 6px 10px">Get Quote <i class="fa-solid fa-plus"></i></a>
+          </div>
+        </div>
+      </div>
+    `;
       }
-
-      const itemsPerPage = 11; // Number of items per page
-      let currentPage = 1; // Current page
 
       function addCards() {
         var container = $("#voiceContainer");
         var startIndex = (currentPage - 1) * itemsPerPage;
-        var endIndex = Math.min(startIndex + itemsPerPage, voiceSamples.length); // Ensure endIndex doesn't exceed the array length
+        var endIndex = Math.min(startIndex + itemsPerPage, voiceSamples.length);
 
         // Clear the container before adding new cards
         container.empty();
 
         // Loop through the voice samples for the current page
         for (var i = startIndex; i < endIndex; i++) {
-          container.append(createCard(voiceSamples[i], i + 1));
+          container.append(initialCards[i]);
         }
 
         // Initialize Plyr for each audio player in the current page
@@ -832,56 +823,101 @@
         }, 1000); // Change the delay as needed
       });
 
-
-
       // Initially load the first page of cards
       addCards();
 
-      $(document).ready(function () {
-        // Function to filter cards based on selected options
-        function filterCards() {
-          var language = $("#languageSelect").val();
-          var voiceType = $("#voiceTypeSelect").val();
-          var accent = $("#accentSelect").val();
+      function filterCards() {
+        var language = $("#languageSelect").val();
+        var voiceType = $("#voiceTypeSelect").val();
+        var accent = $("#accentSelect").val();
 
-          $(".card-custom").hide(); // Hide all cards initially
+        // Get an array of filtered voiceSamples based on the selected options
+        var filteredSamples = voiceSamples.filter(function (sample) {
+          return (
+            (!language || sample.language === language) &&
+            (!voiceType || sample.voiceType === voiceType) &&
+            (!accent || sample.accent === accent)
+          );
+        });
 
-          // Show cards that match the selected options
-          $(".card-custom")
-            .filter(function () {
-              var $card = $(this);
-              var cardLanguage = $card.data("language");
-              var cardVoiceType = $card.data("voice-type");
-              var cardAccent = $card.data("accent");
+        // Clear the container before adding filtered cards
+        $("#voiceContainer").empty();
 
-              return (
-                (!language || cardLanguage === language) &&
-                (!voiceType || cardVoiceType === voiceType) &&
-                (!accent || cardAccent === accent)
-              );
-            })
-            .show();
+        // Get the filtered cards
+        var filteredCards = filteredSamples.map(function (sample, index) {
+          return createCard(sample, index + 1);
+        });
+
+        // Reorganize the filtered cards into rows of four
+        var currentRow = $("<div>").addClass("row");
+        filteredCards.forEach(function (card, index) {
+          currentRow.append($(card));
+          if ((index + 1) % 4 === 0) {
+            $("#voiceContainer").append(currentRow);
+            currentRow = $("<div>").addClass("row");
+          }
+        });
+
+        // Append the remaining cards to the container
+        if (currentRow.children().length > 0) {
+          $("#voiceContainer").append(currentRow);
         }
 
-        // Attach event listeners to dropdowns and search button
-        $("#languageSelect, #voiceTypeSelect, #accentSelect").on(
-          "change",
-          filterCards
-        );
-        $("#searchButton").on("click", filterCards);
+        updateVoiceCount(); // Update the voice count display
 
-        // Reset filters function
-        function resetFilters() {
-          $("#languageSelect").val(""); // Reset language dropdown
-          $("#voiceTypeSelect").val(""); // Reset voice type dropdown
-          $("#accentSelect").val(""); // Reset accent dropdown
-          filterCards(); // Filter cards after resetting
+        // Initialize Plyr for the audio players after filtering the cards
+        $("#voiceContainer").find("audio").each(function () {
+          const player = new Plyr(this);
+          player.volume = 0.5; // Set default volume
+        });
+      }
+
+      // Attach event listeners to dropdowns
+      $("#languageSelect, #voiceTypeSelect, #accentSelect").on("change", filterCards);
+
+      // Attach event listener to "Search" button
+      $("#searchButton").on("click", filterCards);
+
+      // Reset filters function
+      function resetFilters() {
+        $("#languageSelect").val(""); // Reset language dropdown
+        $("#voiceTypeSelect").val(""); // Reset voice type dropdown
+        $("#accentSelect").val(""); // Reset accent dropdown
+
+        // Clear the container before adding cards
+        $("#voiceContainer").empty();
+
+        // Reorganize all cards into rows of four
+        var currentRow = $("<div>").addClass("row");
+        initialCards.forEach(function (card, index) {
+          currentRow.append($(card));
+          if ((index + 1) % 4 === 0) {
+            $("#voiceContainer").append(currentRow);
+            currentRow = $("<div>").addClass("row");
+          }
+        });
+
+        // Append the remaining cards to the container
+        if (currentRow.children().length > 0) {
+          $("#voiceContainer").append(currentRow);
         }
 
-        // Attach event listener to "Reset Filters" button
-        $("#searchButton").on("click", resetFilters);
-      });
+        // Show all cards
+        $(".card-custom").show();
+
+        updateVoiceCount(); // Update the voice count display
+
+        // Initialize Plyr for the audio players after resetting the cards
+        $("#voiceContainer").find("audio").each(function () {
+          const player = new Plyr(this);
+          player.volume = 0.5; // Set default volume
+        });
+      }
+
+      // Attach event listener to "Reset Filters" button
+      $("#searchButton").on("click", resetFilters);
     });
+
   </script>
 
 </body>

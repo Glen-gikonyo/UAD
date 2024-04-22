@@ -4026,3 +4026,15 @@ footer.main-footer {
 }
 
 /* Custom CSS for select dropdowns when clicked */
+
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* or justify-content: flex-start; */
+}
+
+.card-row .col-lg-3 {
+  flex: 0 0 25%; /* Adjust the width as needed */
+  max-width: 25%;
+}
+
