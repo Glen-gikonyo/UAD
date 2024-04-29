@@ -1622,8 +1622,7 @@ header.main-header .header-sticky.active {
 
 footer.main-footer {
   padding: 0 0 60px;
-  background: var(--primary-color) url(../images/footer-bg.svg) no-repeat bottom
-    center;
+  background: var(--primary-color);
   background-size: cover;
 }
 
@@ -2111,7 +2110,6 @@ footer.main-footer {
   display: block;
   height: 16px;
   width: 16px;
-  background: url(../images/icon-solor.svg) no-repeat left center;
   position: absolute;
   top: 20px;
   left: 0;
