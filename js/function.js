@@ -69,7 +69,7 @@
     spaceBetween: 30,
     loop: true,
     autoplay: {
-      delay: 5000, // 10 seconds delay
+      delay: 10000, // 10 seconds delay
     },
 
     pagination: {
