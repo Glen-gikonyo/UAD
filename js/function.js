@@ -441,3 +441,52 @@
   /* Animated Wow Js */
   new WOW().init();
 })(jQuery);
+
+const section = document.querySelector("section"),
+  overlay = document.querySelector(".overlay"),
+  closeBtn = document.querySelector(".close-btn"),
+  container = document.querySelector('.page-team-single');
+
+closeBtn.addEventListener("click", () => {
+  section.classList.remove("active");
+  container.classList.remove("blur");
+});
+
+function showModal() {
+  section.classList.add("active");
+  container.classList.add("blur");
+}
+
+function sendMail(event) {
+  event.preventDefault();
+
+  let params = {
+    name: document.getElementById("name").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    budget: document.getElementById("budget").value,
+    description: document.getElementById("description").value,
+  };
+
+  const serviceID = "service_96f8mdc";
+  const templateID = "template_bcgrqo5";
+
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("loadingIndicator").classList.remove("hidden");
+
+  emailjs.send(serviceID, templateID, params)
+    .then((res) => {
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("budget").value = "";
+      document.getElementById("description").value = "";
+
+      showModal();
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("loadingIndicator").classList.add("hidden");
+    });
+}
