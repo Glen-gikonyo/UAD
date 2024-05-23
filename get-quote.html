@@ -186,7 +186,8 @@
 	</div>
 	<!-- Page Header End -->
 
-	<!-- Team Single Page Start --><div class="page-team-single">
+	<!-- Team Single Page Start -->
+	<div class="page-team-single">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -197,46 +198,120 @@
 							<h2 class="text-anime">Get a Free Quote</h2>
 						</div>
 						<!-- Section Title End -->
-	
-						<!-- Team Contact Form Start -->
 						<div class="team-contact-form wow fadeInUp" data-wow-delay="0.5s">
 							<form id="contactForm" action="#" method="POST" data-toggle="validator"
 								onsubmit="return sendMail(event)">
 								<div class="row">
+									<!-- Name -->
 									<div class="form-group col-md-6 mb-4">
 										<input type="text" name="name" class="form-control" id="name" placeholder="Name"
 											required>
 										<div class="help-block with-errors"></div>
 									</div>
-	
+
+									<!-- Email -->
 									<div class="form-group col-md-6 mb-4">
-										<input type="email" name="email" class="form-control" id="email" placeholder="Email"
-											required>
+										<input type="email" name="email" class="form-control" id="email"
+											placeholder="Email" required>
 										<div class="help-block with-errors"></div>
 									</div>
-	
+
+									<!-- Phone -->
 									<div class="form-group col-md-6 mb-4">
-										<input type="text" name="phone" class="form-control" id="phone" placeholder="Phone"
-											required>
+										<input type="text" name="phone" class="form-control" id="phone"
+											placeholder="Phone" required>
 										<div class="help-block with-errors"></div>
 									</div>
-	
+
+									<!-- Budget -->
 									<div class="form-group col-md-6 mb-4">
 										<input type="number" name="budget" class="form-control" id="budget"
 											placeholder="Your Budget" required>
 										<div class="help-block with-errors"></div>
 									</div>
-	
+
+									<!-- SOW (Scope of Work) -->
 									<div class="form-group col-md-12 mb-4">
-										<textarea name="description" class="form-control" id="description" rows="4"
-											placeholder="Your Project's Brief Description" required></textarea>
+										<label for="sow" class="sow-label">Scope of Work</label><br>
+										<div class="sow-options">
+											<label class="sow-option"><input type="checkbox" name="sow[]"
+													value="Translation">
+												Translation</label>
+											<label class="sow-option"><input type="checkbox" name="sow[]"
+													value="Voiceover"> Voiceover</label>
+											<label class="sow-option"><input type="checkbox" name="sow[]"
+													value="Dubbing"> Dubbing</label>
+											<label class="sow-option"><input type="checkbox" name="sow[]"
+													value="Transcription">
+												Transcription</label>
+											<label class="sow-option"><input type="checkbox" name="sow[]"
+													value="Subtitling"> Subtitling</label>
+											<label class="sow-option"><input type="checkbox" name="sow[]" value="Other"
+													id="sowOtherCheckbox">
+												Other</label>
+										</div>
+										<div class="help-block with-errors"></div>
+										<!-- Other input field, hidden by default -->
+										<div id="otherInputField" class="form-group col-md-12 mb-4 hidden">
+											<input type="text" name="other_sow" class="form-control mt-3"
+												placeholder="Please specify your scope of work" id="otherInput">
+										</div>
+									</div>
+
+									<!-- Source Language -->
+									<div class="form-group col-md-6 mb-4">
+										<input type="text" name="source_language" class="form-control"
+											id="source_language" placeholder="Source Language" required>
 										<div class="help-block with-errors"></div>
 									</div>
-	
+
+									<!-- Target Language -->
+									<div class="form-group col-md-6 mb-4">
+										<input type="text" name="target_language" class="form-control"
+											id="target_language" placeholder="Target Language" required>
+										<div class="help-block with-errors"></div>
+									</div>
+
+									<!-- Volume (In hours/Minutes/Words) -->
+									<div class="form-group col-md-6 mb-4">
+										<input type="text" name="volume" class="form-control" id="volume"
+											placeholder="Volume (In hours/Minutes/Words)" required>
+										<div class="help-block with-errors"></div>
+									</div>
+
+									<!-- Number of Talents -->
+									<div class="form-group col-md-6 mb-4">
+										<input type="number" name="num_talents" class="form-control" id="num_talents"
+											placeholder="Number of Talents" required>
+										<div class="help-block with-errors"></div>
+									</div>
+
+									<!-- Materials to Provide -->
+									<div class="form-group col-md-12 mb-4">
+										<textarea name="materials" class="form-control" id="materials" rows="2"
+											placeholder="Materials to Provide" required></textarea>
+										<div class="help-block with-errors"></div>
+									</div>
+
+									<!-- Deliverables -->
+									<div class="form-group col-md-12 mb-4">
+										<textarea name="deliverables" class="form-control" id="deliverables" rows="2"
+											placeholder="Deliverables" required></textarea>
+										<div class="help-block with-errors"></div>
+									</div>
+
+									<!-- Any Other Details -->
+									<div class="form-group col-md-12 mb-4">
+										<textarea name="other_details" class="form-control" id="other_details" rows="4"
+											placeholder="Any Other Details" required></textarea>
+										<div class="help-block with-errors"></div>
+									</div>
+
+									<!-- Submit Button and Loading Indicator -->
 									<div class="col-md-12 text-center">
 										<button type="submit" class="btn-default" id="submitBtn">Submit Now</button>
 										<div id="msgSubmit" class="h3 text-left hidden"></div>
-										<div id="loadingIndicator" class="hidden">Sending...</div>
+										<div id="loadingIndicator" class="hidden" style="font-size: 600; color: #333">Sending...</div>
 									</div>
 								</div>
 							</form>
@@ -247,13 +322,14 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<section>
 		<div class="overlay"></div>
 		<div class="modal-box">
 			<i class="fa-regular fa-circle-check"></i>
 			<h2><strong>Message Sent</strong></h2>
-			<h3 style="font-size: 20px; font-weight: 500;">Thank you for taking the time to submit your request. A member of the team will be in touch with you
+			<h3 style="font-size: 20px; font-weight: 500;">Thank you for taking the time to submit your request. A
+				member of the team will be in touch with you
 				shortly.
 				However, if your enquiry is urgent, please call us on <strong>+254 722 218 222</strong>.
 			</h3>

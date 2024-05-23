@@ -4115,3 +4115,20 @@ section.active {
   padding: 6px 12px;
   margin: 0 10px;
 }
+
+/* Add this CSS to style the checkboxes in a row and make labels dark */
+
+    .sow-label {
+        color: #333; /* Dark color for the scope of work label */
+        font-weight: 500;
+    }
+
+    .sow-options label {
+        display: inline-block;
+        margin-right: 15px;
+        color: #333; /* Dark color for the checkbox labels */
+    }
+
+    .hidden {
+        display: none;
+    }

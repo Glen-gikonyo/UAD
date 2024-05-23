@@ -460,12 +460,50 @@ function showModal() {
 function sendMail(event) {
   event.preventDefault();
 
-  let params = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    budget: document.getElementById("budget").value,
-    description: document.getElementById("description").value,
+  // Collect form data
+  const sowCheckboxes = document.querySelectorAll('input[name="sow[]"]:checked');
+  const sow = Array.from(sowCheckboxes).map(checkbox => checkbox.value);
+
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const phoneInput = document.getElementById("phone");
+  const budgetInput = document.getElementById("budget");
+  const sourceLanguageInput = document.getElementById("source_language");
+  const targetLanguageInput = document.getElementById("target_language");
+  const volumeInput = document.getElementById("volume");
+  const noOfTalentsInput = document.getElementById("num_talents");
+  const materialsInput = document.getElementById("materials");
+  const deliverablesInput = document.getElementById("deliverables");
+  const otherDetailsInput = document.getElementById("other_details");
+
+  if (!nameInput || !emailInput || !phoneInput || !budgetInput ||
+    !sourceLanguageInput || !targetLanguageInput || !volumeInput ||
+    !noOfTalentsInput || !materialsInput || !deliverablesInput || !otherDetailsInput) {
+    console.error("One or more form elements could not be found.");
+    return;
+  }
+
+  // Validate form fields
+  if (!nameInput.value || !emailInput.value || !phoneInput.value || !budgetInput.value ||
+    !sourceLanguageInput.value || !targetLanguageInput.value || !volumeInput.value ||
+    !noOfTalentsInput.value || !materialsInput.value || !deliverablesInput.value || !otherDetailsInput.value) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  const params = {
+    name: nameInput.value,
+    email: emailInput.value,
+    phone: phoneInput.value,
+    budget: budgetInput.value,
+    sow: sow.join(', '),
+    source_language: sourceLanguageInput.value,
+    target_language: targetLanguageInput.value,
+    volume: volumeInput.value,
+    num_talents: noOfTalentsInput.value,
+    materials: materialsInput.value,
+    deliverables: deliverablesInput.value,
+    other_details: otherDetailsInput.value
   };
 
   const serviceID = "service_96f8mdc";
@@ -476,12 +514,21 @@ function sendMail(event) {
 
   emailjs.send(serviceID, templateID, params)
     .then((res) => {
-      document.getElementById("name").value = "";
-      document.getElementById("email").value = "";
-      document.getElementById("phone").value = "";
-      document.getElementById("budget").value = "";
-      document.getElementById("description").value = "";
+      // Reset form fields
+      nameInput.value = "";
+      emailInput.value = "";
+      phoneInput.value = "";
+      budgetInput.value = "";
+      sowCheckboxes.forEach(checkbox => checkbox.checked = false);
+      sourceLanguageInput.value = "";
+      targetLanguageInput.value = "";
+      volumeInput.value = "";
+      noOfTalentsInput.value = "";
+      materialsInput.value = "";
+      deliverablesInput.value = "";
+      otherDetailsInput.value = "";
 
+      // Show custom modal
       showModal();
     })
     .catch((err) => console.log(err))
@@ -490,3 +537,5 @@ function sendMail(event) {
       document.getElementById("loadingIndicator").classList.add("hidden");
     });
 }
+
+
