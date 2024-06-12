@@ -538,4 +538,9 @@ function sendMail(event) {
     });
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  const track = document.querySelector('.logo-track');
+  const clone = track.cloneNode(true);
+  track.parentNode.appendChild(clone);
+});
 
