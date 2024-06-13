@@ -226,50 +226,6 @@
         </select>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-6 col-12">
-        <!-- Accent dropdown -->
-        <select class="form-select custom-select" id="accentSelect">
-          <option value="" selected disabled>Select Accent</option>
-          <option value="kenyan_english">East African English</option>
-          <option value="nigerian_english">West African English</option>
-          <option value="ghanaian_english">West African English</option>
-          <option value="south_african_english">
-            Southern African English
-          </option>
-          <option value="zimbabwean_english">Southern African English</option>
-          <option value="west_african_french">West African French</option>
-          <option value="senegalese_french">West African French</option>
-          <option value="ivorian_french">West African French</option>
-          <option value="central_african_french">
-            Central African French
-          </option>
-          <option value="cameroonian_french">Central African French</option>
-          <option value="congolese_french">Central African French</option>
-          <option value="north_african_french">North African French</option>
-          <option value="moroccan_french">North African French</option>
-          <option value="algerian_french">North African French</option>
-          <option value="angolan_portuguese">Angolan Portuguese</option>
-          <option value="mozambican_portuguese">Mozambican Portuguese</option>
-          <option value="northern_amharic">Northern Amharic</option>
-          <option value="central_amharic">Central Amharic</option>
-          <option value="southern_amharic">Southern Amharic</option>
-          <option value="standard_kinyarwanda">Standard Kinyarwanda</option>
-          <option value="kinshasha_lingala">Kinshasha Lingala</option>
-          <option value="brazzaville_lingala">Brazzaville Lingala</option>
-          <option value="central_luganda">Central Luganda</option>
-          <option value="eastern_oromo">Eastern Oromo</option>
-          <option value="western_oromo">Western Oromo</option>
-          <option value="northern_somali">Northern Somali</option>
-          <option value="coastal_somali">Coastal Somali</option>
-          <option value="bantu_influenced_somali">
-            Bantu-influenced Somali
-          </option>
-          <option value="kenyan_swahili">Kenyan Swahili</option>
-          <option value="tanzanian_swahili">Tanzanian Swahili</option>
-          <option value="congolese_swahili">Congolese Swahili</option>
-          <option value="standard_tiriginya">Standard Tiriginya</option>
-        </select>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-12">
         <!-- Search button -->
         <button class="btn-default h-75 w-100 d-flex align-items-center justify-content-center" id="searchButton">
           <i class="fa-solid fa-arrows-rotate" style="color: #ffffff"></i>
@@ -278,7 +234,6 @@
       </div>
     </div>
   </div>
-
   <!-- End of Search Functionality -->
 
   <div class="container">
@@ -509,11 +464,11 @@
         imageAvatar: "./images/woman.png",
         title: "African English",
         sub_title1: "Gender: Female",
-        sub_title2: "Accent: East African English",
+        sub_title2: "ENG2FVO_ZILPAH",
         audioSrc: "./voice-samples/ENG2FVO_ZILPAH.mp3",
         language: "african_english",
         voiceType: "female",
-        accent: "kenyan_english",
+        voiceCode: "ENG2FVO_ZILPAH",
       },
       {
         image: "./images/france.jpg",
@@ -906,6 +861,9 @@
                 <source src="${sample.audioSrc}" type="audio/mp3" />
               </audio>
             </div>
+              <a href="${sample.audioSrc}" download class="btn-default download-button" style="font-size: 14px; padding: 6px 10px">
+    <i class="fa-solid fa-download"></i> Download
+  </a>
             <a href="get-quote.html" class="btn-default" style="font-size: 14px; padding: 6px 10px">Get Quote <i class="fa-solid fa-plus"></i></a>
           </div>
         </div>
