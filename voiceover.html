@@ -220,7 +220,7 @@
         <!-- Voice type dropdown -->
         <select class="form-select custom-select" id="voiceTypeSelect">
           <option value="" selected disabled>Select Voice Type</option>
-          <option value="any_gender">Any Gender</option>
+          <option value="">Any Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
@@ -985,51 +985,46 @@
         </div>
       `;
     }
-
     function addCards() {
-      var container = $("#voiceContainer");
-      var startIndex = (currentPage - 1) * itemsPerPage;
-      var endIndex = Math.min(startIndex + itemsPerPage, filteredSamples.length);
+  var container = $("#voiceContainer");
+  container.html(''); // Clear existing cards
 
-      // Clear the container before adding new cards if it's the first page
-      if (currentPage === 1) {
-        container.empty();
+  var startIndex = (currentPage - 1) * itemsPerPage;
+  var endIndex = Math.min(startIndex + itemsPerPage, filteredSamples.length);
+
+  // Loop through the filtered voice samples for the current page
+  for (var i = startIndex; i < endIndex; i++) {
+    container.append(createCard(filteredSamples[i], i + 1));
+  }
+
+  // Initialize Plyr for each audio player in the current page
+  container.find("audio").each(function () {
+    const player = new Plyr(this);
+    player.volume = 0.5; // Set default volume
+
+    player.on('playing', () => {
+      if (currentlyPlayingAudio && currentlyPlayingAudio !== this) {
+        currentlyPlayingAudio.pause();
       }
+      currentlyPlayingAudio = this;
+    });
 
-      // Loop through the filtered voice samples for the current page
-      for (var i = startIndex; i < endIndex; i++) {
-        container.append(createCard(filteredSamples[i], i + 1));
+    player.on('ended', () => {
+      if (currentlyPlayingAudio === this) {
+        currentlyPlayingAudio = null;
       }
+    });
+  });
 
-      // Initialize Plyr for each audio player in the current page
-      container.find("audio").each(function () {
-        const player = new Plyr(this);
-        player.volume = 0.5; // Set default volume
+  updateVoiceCount();
 
-        player.on('playing', () => {
-          if (currentlyPlayingAudio && currentlyPlayingAudio !== this) {
-            currentlyPlayingAudio.pause();
-          }
-          currentlyPlayingAudio = this;
-        });
-
-        player.on('ended', () => {
-          if (currentlyPlayingAudio === this) {
-            currentlyPlayingAudio = null;
-          }
-        });
-      });
-
-      updateVoiceCount();
-
-      // Show or hide the "Load More" button
-      if (endIndex >= filteredSamples.length) {
-        $("#loadMoreButton").hide();
-      } else {
-        $("#loadMoreButton").show();
-      }
-    }
-
+  // Show or hide the "Load More" button
+  if (endIndex >= filteredSamples.length) {
+    $("#loadMoreButton").hide();
+  } else {
+    $("#loadMoreButton").show();
+  }
+}
     function updateVoiceCount() {
       var totalSamples = filteredSamples.length;
       var displayedSamples = Math.min(currentPage * itemsPerPage, totalSamples);
@@ -1053,37 +1048,45 @@
 
     addCards();
 
-    function filterCards() {
-      var language = $("#languageSelect").val();
-      var voiceType = $("#voiceTypeSelect").val();
-      var accent = $("#accentSelect").val();
+// Event listener for filtering voice samples
+function filterCards() {
+  var language = $("#languageSelect").val();
+  var voiceType = $("#voiceTypeSelect").val();
+  var accent = $("#accentSelect").val();
 
-      filteredSamples = voiceSamples.filter(function (sample) {
-        return (
-          (!language || sample.language === language) &&
-          (!voiceType || sample.voiceType === voiceType) &&
-          (!accent || sample.accent === accent)
-        );
-      });
+  filteredSamples = voiceSamples.filter(function (sample) {
+    let matchesLanguage = !language || sample.language === language;
+    let matchesVoiceType =
+      !voiceType ||
+      voiceType === "any_gender" ||
+      sample.voiceType === voiceType;
+    let matchesAccent = !accent || sample.accent === accent;
 
-      currentPage = 1;
-      addCards();
-    }
+    return matchesLanguage && matchesVoiceType && matchesAccent;
+  });
 
-    $("#languageSelect, #voiceTypeSelect, #accentSelect").on("change", filterCards);
-    $("#searchButton").on("click", filterCards);
+  currentPage = 1;
+  $("#voiceContainer").html('');
+  addCards();
+}
 
-    function resetFilters() {
-      $("#languageSelect").val("");
-      $("#voiceTypeSelect").val("");
-      $("#accentSelect").val("");
 
-      filteredSamples = voiceSamples;
-      currentPage = 1;
-      addCards();
-    }
+$("#languageSelect, #voiceTypeSelect, #accentSelect").on("change", filterCards);
+$("#searchButton").on("click", filterCards);
+$("#resetFiltersButton").on("click", resetFilters);
 
-    $("#resetFiltersButton").on("click", resetFilters);
+
+function resetFilters() {
+  $("#languageSelect").val("");
+  $("#voiceTypeSelect").val("");
+  $("#accentSelect").val("");
+
+  filteredSamples = voiceSamples;
+  currentPage = 1;
+  $("#voiceContainer").html('');
+  addCards();
+}
+
   });
   </script>
 
