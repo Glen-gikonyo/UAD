@@ -3230,19 +3230,22 @@ footer.main-footer {
 /* Voiceover */
 .card-custom {
   overflow: hidden;
-  min-height: 450px;
+  min-height: 300px; /* Adjust as needed */
   border: 0;
   box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+  margin-bottom: 30px; /* Add margin to separate cards */
 }
 
 .card-custom-img {
-  height: 200px;
-  min-height: 200px;
+  height: 180x;
+  min-height: 180px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-color: inherit;
+  position: relative; /* Ensure position is relative for overlay */
 }
+
 
 /* First border-left-width setting is a fallback */
 .card-custom-img::after {
@@ -3270,8 +3273,12 @@ footer.main-footer {
   position: absolute;
   top: 100px;
   left: 1.25rem;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
+}
+
+.download-button {
+  margin-right: 10px;
 }
 
 /* Styling for the audio player */
