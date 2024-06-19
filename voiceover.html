@@ -953,141 +953,147 @@
   $(document).ready(function () {
     const itemsPerPage = 11; // Number of items per page
     let currentPage = 1; // Current page
+    let filteredSamples = voiceSamples; // Initialize with all samples
 
     function createCard(sample, id) {
-      return `
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-          <div class="card card-custom bg-white border-white"
-            data-language="${sample.language}"
-            data-voice-type="${sample.voiceType}"
-            data-accent="${sample.accent}">
-            <div class="card-custom-img" style="background-image: url(${sample.image})"></div>
-            <div class="card-custom-avatar">
-              <img class="img-fluid" src="${sample.imageAvatar}" alt="Avatar" />
+        return `
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="card card-custom bg-white border-white"
+                    data-language="${sample.language}"
+                    data-voice-type="${sample.voiceType}"
+                    data-accent="${sample.accent}">
+                    <div class="card-custom-img" style="background-image: url(${sample.image})"></div>
+                    <div class="card-custom-avatar">
+                        <img class="img-fluid" src="${sample.imageAvatar}" alt="Avatar" />
+                    </div>
+                    <div class="card-body" style="overflow-y: auto">
+                        <h3 class="card-title">${sample.title}</h3>
+                        <h6 class="card-text">${sample.sub_title1}</h6>
+                        <h6 class="card-text">${sample.sub_title2}</h6>
+                    </div>
+                    <div class="card-footer" style="background: inherit; border-color: inherit">
+                        <div class="audio-container">
+                            <audio id="player${id}" crossorigin playsinline>
+                                <source src="${sample.audioSrc}" type="audio/mp3" />
+                            </audio>
+                        </div>
+                        <a href="${sample.audioSrc}" download class="btn-default download-button" style="font-size: 14px; padding: 6px 10px">
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                        <a href="get-quote.html" class="btn-default" style="font-size: 14px; padding: 6px 10px">Get Quote <i class="fa-solid fa-plus"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body" style="overflow-y: auto">
-              <h3 class="card-title">${sample.title}</h3>
-              <h6 class="card-text">${sample.sub_title1}</h6>
-              <h6 class="card-text">${sample.sub_title2}</h6>
-            </div>
-            <div class="card-footer" style="background: inherit; border-color: inherit">
-              <div class="audio-container">
-                <audio id="player${id}" crossorigin playsinline>
-                  <source src="${sample.audioSrc}" type="audio/mp3" />
-                </audio>
-              </div>
-              <a href="${sample.audioSrc}" download class="btn-default download-button" style="font-size: 14px; padding: 6px 10px">
-                <i class="fa-solid fa-download"></i> Download
-              </a>
-              <a href="get-quote.html" class="btn-default" style="font-size: 14px; padding: 6px 10px">Get Quote <i class="fa-solid fa-plus"></i></a>
-            </div>
-          </div>
-        </div>
-      `;
+        `;
     }
+
     function addCards() {
-  var container = $("#voiceContainer");
-  container.html(''); // Clear existing cards
+        var container = $("#voiceContainer");
+        container.html(''); // Clear existing cards
 
-  var startIndex = (currentPage - 1) * itemsPerPage;
-  var endIndex = Math.min(startIndex + itemsPerPage, filteredSamples.length);
+        var startIndex = (currentPage - 1) * itemsPerPage;
+        var endIndex = Math.min(startIndex + itemsPerPage, filteredSamples.length);
 
-  // Loop through the filtered voice samples for the current page
-  for (var i = startIndex; i < endIndex; i++) {
-    container.append(createCard(filteredSamples[i], i + 1));
-  }
+        // Loop through the filtered voice samples for the current page
+        for (var i = startIndex; i < endIndex; i++) {
+            container.append(createCard(filteredSamples[i], i + 1));
+        }
 
-  // Initialize Plyr for each audio player in the current page
-  container.find("audio").each(function () {
-    const player = new Plyr(this);
-    player.volume = 0.5; // Set default volume
+        // Initialize Plyr for each audio player in the current page
+        container.find("audio").each(function () {
+            const player = new Plyr(this);
+            player.volume = 0.5; // Set default volume
 
-    player.on('playing', () => {
-      if (currentlyPlayingAudio && currentlyPlayingAudio !== this) {
-        currentlyPlayingAudio.pause();
-      }
-      currentlyPlayingAudio = this;
-    });
+            player.on('playing', () => {
+                if (currentlyPlayingAudio && currentlyPlayingAudio !== this) {
+                    currentlyPlayingAudio.pause();
+                }
+                currentlyPlayingAudio = this;
+            });
 
-    player.on('ended', () => {
-      if (currentlyPlayingAudio === this) {
-        currentlyPlayingAudio = null;
-      }
-    });
-  });
+            player.on('ended', () => {
+                if (currentlyPlayingAudio === this) {
+                    currentlyPlayingAudio = null;
+                }
+            });
+        });
 
-  updateVoiceCount();
+        updateVoiceCount();
 
-  // Show or hide the "Load More" button
-  if (endIndex >= filteredSamples.length) {
-    $("#loadMoreButton").hide();
-  } else {
-    $("#loadMoreButton").show();
-  }
-}
+        // Show or hide the "Load More" button
+        if (endIndex >= filteredSamples.length) {
+            $("#loadMoreButton").hide();
+        } else {
+            $("#loadMoreButton").show();
+        }
+    }
+
     function updateVoiceCount() {
-      var totalSamples = filteredSamples.length;
-      var displayedSamples = Math.min(currentPage * itemsPerPage, totalSamples);
-      $("#voiceCount").text(`Displaying ${displayedSamples} voices out of ${totalSamples} voices.`);
+        var totalSamples = filteredSamples.length;
+        var displayedSamples = Math.min(currentPage * itemsPerPage, totalSamples);
+        $("#voiceCount").text(`Displaying ${displayedSamples} voices out of ${totalSamples} voices.`);
     }
 
     $("#loadMoreButton").click(function () {
-      $(this).prop("disabled", true);
-      $(".preloader").show();
+        $(this).prop("disabled", true);
+        $(".preloader").show();
 
-      var scrollPosition = $(".navbar").height() || 0;
+        var scrollPosition = $(".navbar").height() || 0;
 
-      setTimeout(function () {
-        currentPage++;
-        addCards();
-        $(".preloader").hide();
-        $("#loadMoreButton").prop("disabled", false);
-        window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
-      }, 1000);
+        setTimeout(function () {
+            currentPage++;
+            addCards();
+            $(".preloader").hide();
+            $("#loadMoreButton").prop("disabled", false);
+            window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+        }, 1000);
     });
 
-    addCards();
+    // Event listener for filtering voice samples
+    function filterCards() {
+        var language = $("#languageSelect").val();
+        var voiceType = $("#voiceTypeSelect").val();
+        var accent = $("#accentSelect").val();
 
-// Event listener for filtering voice samples
-function filterCards() {
-  var language = $("#languageSelect").val();
-  var voiceType = $("#voiceTypeSelect").val();
-  var accent = $("#accentSelect").val();
+        filteredSamples = voiceSamples.filter(function (sample) {
+            let matchesLanguage = !language || sample.language === language;
+            let matchesVoiceType =
+                !voiceType ||
+                voiceType === "any_gender" ||
+                sample.voiceType === voiceType;
+            let matchesAccent = !accent || sample.accent === accent;
 
-  filteredSamples = voiceSamples.filter(function (sample) {
-    let matchesLanguage = !language || sample.language === language;
-    let matchesVoiceType =
-      !voiceType ||
-      voiceType === "any_gender" ||
-      sample.voiceType === voiceType;
-    let matchesAccent = !accent || sample.accent === accent;
+            return matchesLanguage && matchesVoiceType && matchesAccent;
+        });
 
-    return matchesLanguage && matchesVoiceType && matchesAccent;
-  });
+        currentPage = 1;
+        $("#voiceContainer").html('');
+        addCards();
+    }
 
-  currentPage = 1;
-  $("#voiceContainer").html('');
-  addCards();
-}
+    function resetFilters() {
+        // Check if any filters are currently applied
+        if ($("#languageSelect").val() || $("#voiceTypeSelect").val() || $("#accentSelect").val()) {
+            // Reset filters
+            $("#languageSelect").val("");
+            $("#voiceTypeSelect").val("");
+            $("#accentSelect").val("");
 
+            filteredSamples = voiceSamples;
+            currentPage = 1;
+            $("#voiceContainer").html('');
+            addCards();
+        }
+        // If no filters are applied, do nothing
+    }
 
-$("#languageSelect, #voiceTypeSelect, #accentSelect").on("change", filterCards);
-$("#searchButton").on("click", filterCards);
-$("#resetFiltersButton").on("click", resetFilters);
+    $("#languageSelect, #voiceTypeSelect, #accentSelect").on("change", filterCards);
+    $("#searchButton").on("click", filterCards);
+    $("#resetFiltersButton").on("click", resetFilters);
 
+    addCards(); // Initial load of cards
+});
 
-function resetFilters() {
-  $("#languageSelect").val("");
-  $("#voiceTypeSelect").val("");
-  $("#accentSelect").val("");
-
-  filteredSamples = voiceSamples;
-  currentPage = 1;
-  $("#voiceContainer").html('');
-  addCards();
-}
-
-  });
   </script>
 
 </body>
