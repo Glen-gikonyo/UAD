@@ -317,9 +317,9 @@ a:focus {
 
 .loading-container,
 .loading {
-  height: 100px;
+  height: 150px; /* Increased to make space for larger image */
   position: relative;
-  width: 100px;
+  width: 150px; /* Increased to make space for larger image */
   border-radius: 100%;
 }
 
@@ -328,7 +328,9 @@ a:focus {
 }
 
 .loading {
-  border: 1px solid transparent;
+  width: 100%;
+  height: 100%;
+  border: 8px solid transparent; /* Increased border size */
   border-color: transparent var(--white-color) transparent var(--white-color);
   animation: rotate-loading 1.5s linear 0s infinite normal;
   transform-origin: 50% 50%;
@@ -347,7 +349,17 @@ a:focus {
   position: absolute;
   top: 50%;
   left: 50%;
-  max-width: 100px;
+  width: 100px; /* Ensures the container is centered */
+  height: 100px; /* Ensures the container is centered */
+  transform: translate(-50%, -50%);
+}
+
+#loading-icon img {
+  max-width: 120%; /* Adjust the size as needed */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -355,11 +367,11 @@ a:focus {
   0% {
     transform: rotate(0deg);
   }
-
   100% {
     transform: rotate(360deg);
   }
 }
+
 
 .section-title {
   text-align: center;
