@@ -56,43 +56,47 @@
 /************************************/
 /**** 	  02. Slider For Brands ****/
 /************************************/
-.section-title {
-  margin-bottom: 0; /* Remove margin between the section title and the logos */
-}
-
-.logo-container {
-  position: relative;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.logo-marquee {
-  display: flex;
-  animation: marquee 15s linear infinite; /* Adjusted for more speed */
-}
-
-.logo-track {
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-.logo-track img {
-  display: inline-block;
-  margin-right: 3rem; /* Adjusted spacing between logos */
-  width: 10rem;
-  height: 10rem;
-  object-fit: contain;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
+  .section-title {
+    margin-bottom: 0;
   }
-  100% {
-    transform: translateX(-100%);
+  
+  .logo-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
   }
-}
+  
+  .logo-marquee {
+    display: flex;
+    width: 200%; /* Double the width to accommodate two sets of logos */
+  }
+  
+  .logo-track {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    animation: marquee 30s linear infinite; /* Increased duration for slower movement */
+  }
+  
+  .logo-track img {
+    height: 8rem; /* Adjust this value as needed */
+    width: auto;
+    max-width: 10rem;
+    object-fit: contain;
+    margin-right: 3rem;
+    flex-shrink: 0;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%); /* Move by full width for complete cycle */
+    }
+  }
+  
+  /* Fading effect remains the same */
 
 /* Fading effect */
 .logo-container::before,
@@ -100,7 +104,7 @@
   content: '';
   position: absolute;
   top: 0;
-  width: 5rem; /* Adjust the width of the fading effect */
+  width: 5rem;
   height: 100%;
   z-index: 1;
 }
@@ -114,7 +118,6 @@
   right: 0;
   background: linear-gradient(to left, white, transparent);
 }
-
 
 /************************************/
 /**** 	   03. General css		 ****/

@@ -539,8 +539,40 @@ function sendMail(event) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+  const marquee = document.querySelector('.logo-marquee');
   const track = document.querySelector('.logo-track');
-  const clone = track.cloneNode(true);
-  track.parentNode.appendChild(clone);
-});
+  
+  // Function to clone and append logos
+  function cloneAndAppendLogos() {
+    const clone = track.cloneNode(true);
+    marquee.appendChild(clone);
+  }
 
+  // Initial cloning
+  cloneAndAppendLogos();
+
+  // Function to check if new images have been added
+  function updateMarquee() {
+    const tracks = marquee.querySelectorAll('.logo-track');
+    if (tracks.length > 1) {
+      tracks[1].remove(); // Remove the old clone
+    }
+    cloneAndAppendLogos(); // Add a new clone with updated logos
+  }
+
+  // Check for updates periodically
+  setInterval(updateMarquee, 5000); // Check every 5 seconds
+
+  // Adjust animation duration based on content width
+  function adjustAnimationDuration() {
+    const totalWidth = track.scrollWidth;
+    const duration = totalWidth / 50; // Adjust this divisor to change speed
+    track.style.animationDuration = `${duration}s`;
+    tracks[1].style.animationDuration = `${duration}s`;
+  }
+
+  // Initial adjustment and periodic check
+  adjustAnimationDuration();
+  window.addEventListener('resize', adjustAnimationDuration);
+  setInterval(adjustAnimationDuration, 5000);
+});
